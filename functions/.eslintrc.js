@@ -14,6 +14,7 @@ module.exports = {
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
+    // https://stackoverflow.com/questions/69897000/parsing-error-cannot-read-file-tsconfig-json-eslint-after-following-firebase
     tsconfigRootDir: __dirname,
     project: ["tsconfig.json", "tsconfig.dev.json"],
     sourceType: "module",
