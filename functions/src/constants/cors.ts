@@ -1,5 +1,5 @@
 import config from "../config";
 
-const cors = [config.LOCALHOST, config.GITHUB_PAGE, /chrome-extension:\/\/.*/];
+const cors = [config.LOCALHOST, config.GITHUB, /chrome-extension:\/\/.*/];
 
 export default cors;
