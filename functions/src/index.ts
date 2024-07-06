@@ -3,6 +3,7 @@ import admin from "firebase-admin";
 import axios from "axios";
 import config from "./config";
 import apiPath from "./constants/apiPath";
+import corsPolicy from "./constants/cors";
 
 interface TrelloCredentials {
   api_key: string;
@@ -21,10 +22,6 @@ interface TrelloCard {
 admin.initializeApp();
 
 const db = admin.firestore();
-
-const corsPolicy = {
-  cors: [config.LOCALHOST],
-};
 
 export const getTrelloCards = onRequest(corsPolicy, async (_, res) => {
   try {
