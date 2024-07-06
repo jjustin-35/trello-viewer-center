@@ -25,8 +25,8 @@ export const getTrelloCards = onRequest({
       `${config.TRELLO}${apiPath.GET_BOARD_CARDS}`,
       {
         params: {
-          key: apiKey,
-          token: apiToken,
+          key: apiKey.value(),
+          token: apiToken.value(),
           fields: "name,desc,due,dueComplete,labels",
         },
       }
