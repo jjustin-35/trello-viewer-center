@@ -8,7 +8,9 @@
     "shell": "yarn run build && firebase functions:shell",
     "start": "yarn run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "encrypt": "cryptify encrypt .env.local -p $ENV_SECRET -o",
+    "decrypt": "cryptify decrypt .env.local -p $ENV_SECRET -o"
   },
   "engines": {
     "node": "20"
@@ -22,6 +24,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
+    "cryptify": "^4.1.2",
     "eslint": "^8.9.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.25.4",

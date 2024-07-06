@@ -1,14 +1,9 @@
 import { onRequest } from "firebase-functions/v2/https";
-import admin from "firebase-admin";
+import { defineString } from "firebase-functions/params";
 import axios from "axios";
 import config from "./config";
 import apiPath from "./constants/apiPath";
-import corsPolicy from "./constants/cors";
-
-interface TrelloCredentials {
-  api_key: string;
-  api_token: string;
-}
+import cors from "./constants/cors";
 
 interface TrelloCard {
   id: string;
@@ -19,26 +14,19 @@ interface TrelloCard {
   dueComplete: boolean;
 }
 
-admin.initializeApp();
+const apiKey = defineString("TRELLO_API_KEY");
+const apiToken = defineString("TRELLO_API_TOKEN");
 
-const db = admin.firestore();
-
-export const getTrelloCards = onRequest(corsPolicy, async (_, res) => {
+export const getTrelloCards = onRequest({
+  cors,
+}, async (_, res) => {
   try {
-    const doc = await db.collection("credentials").doc("trello").get();
-    if (!doc.exists) {
-      res.status(404).send("No credentials found");
-      return;
-    }
-
-    const { api_key, api_token } = doc.data() as TrelloCredentials;
-
     const { data } = await axios.get<TrelloCard[]>(
       `${config.TRELLO}${apiPath.GET_BOARD_CARDS}`,
       {
         params: {
-          key: api_key,
-          token: api_token,
+          key: apiKey,
+          token: apiToken,
           fields: "name,desc,due,dueComplete,labels",
         },
       }

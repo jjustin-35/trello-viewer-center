@@ -1,7 +1,5 @@
 import config from "../config";
 
-const corsPolicy = {
-  cors: [config.LOCALHOST],
-};
+const cors = [config.LOCALHOST];
 
-export default corsPolicy;
+export default cors;
