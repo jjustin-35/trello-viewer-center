@@ -44,7 +44,7 @@ export const getTrelloCards = onRequest(corsPolicy, async (_, res) => {
       }
     );
 
-    res.status(200).json({ data });
+    res.status(200).json(data);
   } catch (error) {
     res.status(500).send(error.toString());
   }
