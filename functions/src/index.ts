@@ -14,26 +14,31 @@ interface TrelloCard {
   dueComplete: boolean;
 }
 
-const apiKey = defineString("TRELLO_API_KEY");
-const apiToken = defineString("TRELLO_API_TOKEN");
+const apiKey =
+  process.env.TRELLO_API_KEY || defineString("TRELLO_API_KEY").value();
+const apiToken =
+  process.env.TRELLO_API_TOKEN || defineString("TRELLO_API_TOKEN").value();
 
-export const getTrelloCards = onRequest({
-  cors,
-}, async (_, res) => {
-  try {
-    const { data } = await axios.get<TrelloCard[]>(
-      `${config.TRELLO}${apiPath.GET_BOARD_CARDS}`,
-      {
-        params: {
-          key: apiKey.value(),
-          token: apiToken.value(),
-          fields: "name,desc,due,dueComplete,labels",
-        },
-      }
-    );
+export const getTrelloCards = onRequest(
+  {
+    cors,
+  },
+  async (_, res) => {
+    try {
+      const { data } = await axios.get<TrelloCard[]>(
+        `${config.TRELLO}${apiPath.GET_BOARD_CARDS}`,
+        {
+          params: {
+            key: apiKey,
+            token: apiToken,
+            fields: "name,desc,due,dueComplete,labels",
+          },
+        }
+      );
 
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(500).send(error.toString());
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(500).send(error.toString());
+    }
   }
-});
+);

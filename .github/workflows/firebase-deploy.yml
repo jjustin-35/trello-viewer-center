@@ -29,4 +29,4 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           TRELLO_API_KEY: ${{ secrets.TRELLO_API_KEY }}
           TRELLO_API_TOKEN: ${{ secrets.TRELLO_API_TOKEN }}
-        run: TRELLO_API_KEY=$TRELLO_API_KEY TRELLO_API_TOKEN=$TRELLO_API_TOKEN firebase deploy --only functions
+        run: firebase deploy --only functions
