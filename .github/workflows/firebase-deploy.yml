@@ -19,10 +19,10 @@ jobs:
         node-version: '20'
 
     - name: Install Dependencies
-      run: npm install
+      run: cd functions && yarn install
 
     - name: Install Firebase CLI
-      run: npm install -g firebase-tools
+      run: yarn global add firebase-tools
 
     - name: Deploy to Firebase
       env:
