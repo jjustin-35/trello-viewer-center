@@ -11,4 +11,7 @@ This project is a firebase serverless function that manage the trello api secret
 
 ## How to run
 1. Clone this repository
-2. Run `npm install`
+2. Run `cd functions && yarn install`
+3. Run `ENV_SECRET={{ENV_SECRET}} yarn decrypt` decrypt the `.env.local` file, replace `{{ENV_SECRET}}` with the secret
+4. Run `yarn serve` to start the firebase emulator
+

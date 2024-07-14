@@ -10,23 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
 
-    - name: Install Dependencies
-      run: cd functions && yarn install
+      - name: Install Dependencies
+        run: cd functions && yarn install
 
-    - name: Install Firebase CLI
-      run: yarn global add firebase-tools
+      - name: Install Firebase CLI
+        run: yarn global add firebase-tools
 
-    - name: Deploy to Firebase
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        TRELLO_API_KEY: ${{ secrets.TRELLO_API_KEY }}
-        TRELLO_API_TOKEN: ${{ secrets.TRELLO_API_TOKEN }}
-      run: firebase deploy --only functions
+      - name: Deploy to Firebase
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          TRELLO_API_KEY: ${{ secrets.TRELLO_API_KEY }}
+          TRELLO_API_TOKEN: ${{ secrets.TRELLO_API_TOKEN }}
+        run: TRELLO_API_KEY=$TRELLO_API_KEY TRELLO_API_TOKEN=$TRELLO_API_TOKEN firebase deploy --only functions
