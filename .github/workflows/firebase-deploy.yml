@@ -24,10 +24,10 @@ jobs:
       - name: Install Firebase CLI
         run: yarn global add firebase-tools
 
-      - name: Create .env file
+      - name: Create .env file in functions
         run: |
-          echo "TRELLO_API_KEY=${{ secrets.TRELLO_API_KEY }}" >> .env
-          echo "TRELLO_API_TOKEN=${{ secrets.TRELLO_API_TOKEN }}" >> .env
+          echo "TRELLO_API_KEY=${{ secrets.TRELLO_API_KEY }}" >> functions/.env
+          echo "TRELLO_API_TOKEN=${{ secrets.TRELLO_API_TOKEN }}" >> functions/.env
 
       - name: List files in functions
         run: ls functions
