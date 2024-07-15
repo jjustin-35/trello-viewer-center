@@ -21,12 +21,15 @@ jobs:
       - name: Install Dependencies
         run: cd functions && yarn install
 
+      - name: Create .env file
+        run: |
+          echo "TRELLO_API_KEY=${{ secrets.TRELLO_API_KEY }}" >> .env
+          echo "TRELLO_API_TOKEN=${{ secrets.TRELLO_API_TOKEN }}" >> .env
+
       - name: Install Firebase CLI
         run: yarn global add firebase-tools
 
       - name: Deploy to Firebase
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          TRELLO_API_KEY: ${{ secrets.TRELLO_API_KEY }}
-          TRELLO_API_TOKEN: ${{ secrets.TRELLO_API_TOKEN }}
         run: firebase deploy --only functions

@@ -14,10 +14,8 @@ interface TrelloCard {
   dueComplete: boolean;
 }
 
-const apiKey =
-  process.env.TRELLO_API_KEY || defineString("TRELLO_API_KEY").value();
-const apiToken =
-  process.env.TRELLO_API_TOKEN || defineString("TRELLO_API_TOKEN").value();
+const apiKey = defineString("TRELLO_API_KEY");
+const apiToken =defineString("TRELLO_API_TOKEN");
 
 export const getTrelloCards = onRequest(
   {
@@ -29,8 +27,8 @@ export const getTrelloCards = onRequest(
         `${config.TRELLO}${apiPath.GET_BOARD_CARDS}`,
         {
           params: {
-            key: apiKey,
-            token: apiToken,
+            key: apiKey.value(),
+            token: apiToken.value(),
             fields: "name,desc,due,dueComplete,labels",
           },
         }
